@@ -105,17 +105,11 @@ function sanitizeLatex(text) {
     });
     s = processedLines.join('\n');
 
-    // ── 4. Corrigir espaçamento dentro dos delimitadores ──
-    // "$ x + 1 $" → "$x + 1$" (KaTeX não gosta de espaço colado no $)
-    s = s.replace(/\$\s+/g, (match, offset) => {
-        // Só corrige se for abertura de delimitador (não $$)
-        if (s[offset + 1] === '$') return match; // é $$, não mexe
-        return '$';
-    });
-    s = s.replace(/\s+\$/g, (match, offset) => {
-        if (offset > 0 && s[offset - 1] === '$') return match; // é $$, não mexe
-        return '$';
-    });
+    // ── 4. Corrigir espaçamento APENAS dentro dos delimitadores ($ ... $) ──
+    // "$ x + 1 $" → "$x + 1$" sem engolir os espaços externos entre texto e fórmulas
+    const trimSingleDollar = (match, pre, math, post) => `${pre}$${math.trim()}$${post}`;
+    s = s.replace(/(^|[^\$])\$([^$\n]+?)\$([^$]|$)/g, trimSingleDollar);
+    s = s.replace(/(^|[^\$])\$([^$\n]+?)\$([^$]|$)/g, trimSingleDollar);
 
     // ── 5. Corrigir delimitadores desbalanceados ──
     // Conta $ simples (não $$) e fecha se ímpar
