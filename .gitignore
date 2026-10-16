@@ -1,0 +1,15 @@
+venv/
+venv_windows_old/
+.env
+__pycache__/
+doninha.db
+db/chroma/
+db/docstore/
+db/chroma_vazio_backup/
+
+# Livros (direitos autorais + pesados) - ficam so na maquina local
+data/*.pdf
+
+# Arquivos pessoais / do sistema
+DxDiag.txt
+.vscode/

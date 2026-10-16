@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doninha Matemática</title>
+    <meta name="description"
+        content="Tutor de matemática local com IA socrática, renderização LaTeX e cálculo exato via SymPy.">
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Fonte Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- KaTeX para renderização LaTeX (cópia local em vendor/ — funciona offline) -->
+    <link rel="stylesheet" href="vendor/katex/katex.min.css">
+    <script defer src="vendor/katex/katex.min.js"></script>
+    <script defer src="vendor/katex/contrib/auto-render.min.js"></script>
+
+    <!-- Marked.js para Markdown → HTML (cópia local em vendor/) -->
+    <script src="vendor/marked.min.js"></script>
+</head>
+
+<body>
+    <div class="window">
+        <div class="app-container">
+
+            <!-- ─── Sidebar ─────────────────────────────── -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h2>Doninha Matemática</h2>
+                    <span class="subtitle">Tutor Matemático Local</span>
+                </div>
+
+                <!-- Seletor de Modelo -->
+                <div class="model-selector-wrapper">
+                    <label for="modelSelect">Modelo</label>
+                    <div class="select-shell">
+                        <select id="modelSelect">
+                            <option value="llama3.2">llama3.2</option>
+                        </select>
+                        <span class="select-arrow">▾</span>
+                    </div>
+                </div>
+
+                <!-- Lista de Sessões (dinâmica) -->
+                <div class="chat-history" id="sessionList">
+                    <div class="history-loading">Conectando...</div>
+                </div>
+
+                <button class="new-chat-btn" id="newChatBtn">+ New Chat</button>
+            </aside>
+
+            <!-- ─── Área Principal de Chat ───────────────── -->
+            <main class="chat-container">
+                <div class="chat-header">
+                    <span id="chatHeaderText">How can i help you?</span>
+                    <span class="model-badge" id="modelBadge">llama3.2</span>
+                </div>
+
+                <div class="messages" id="chatMessages">
+                    <div class="message assistant">
+                        <div class="message-content">
+                            Hi! I'm the <strong>Doninha Matemática</strong>. Write something to get started — feel free
+                            to ask
+                            anything about mathematics. I support LaTeX rendering!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-area">
+                    <span class="prompt-symbol">[I]</span>
+                    <textarea id="userInput" placeholder="Enter your message... (Shift+Enter para nova linha)" rows="1"
+                        autofocus></textarea>
+                </div>
+            </main>
+        </div>
+
+        <!-- ─── Status Bar ───────────────────────────────── -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <span><span class="highlight">I</span> Focar input</span>
+                <span><span class="highlight">ENTER</span> Enviar</span>
+                <span><span class="highlight">SHIFT+ENTER</span> Nova linha</span>
+            </div>
+            <div class="status-right">
+                <span class="status-indicator" id="statusIndicator"></span>
+                <span id="connectionStatus">Terminal Ready</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
