@@ -1,3 +1,5 @@
+console.log('[Doninha] app.js v2 carregado (LaTeX spacing fix ativo).');
+
 // ─── Configuração ────────────────────────────────────────────────────────────
 
 // Se estiver rodando como arquivo local, aponta pro localhost:8000. Se estiver no ngrok, usa a URL atual.

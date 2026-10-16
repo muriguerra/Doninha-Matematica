@@ -317,6 +317,7 @@ body {
 
 .katex {
     font-size: 1.12em !important;
+    padding: 0 0.12em;
 }
 
 /* ─── Streaming ─────────────────────────────────────────────────────────── */
